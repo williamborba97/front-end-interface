@@ -30,10 +30,10 @@ class Posts extends Component{
 
            {console.log(posts)}
 
-            {posts.map(post=>{
+            {posts.map(post=>(
             <li key={post.usersId}>
-                <h2>{post.show}dfdfeasdasdas</h2>
-            </li>})
+                <h2>{post.title}</h2>
+            </li>))
             };
 
             </Container>
