@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import posts from '../api/APIs/api.posts';
-//import userDetail from '../api/APIs/api.userDetail'
+import UserDetail from '../api/APIs/api.userDetail'
 //import Coments from "../api/APIs/api.coments";
 import { Container } from "./details/styles"
 
@@ -8,39 +8,44 @@ class Posts extends Component{
 
     state = {
         posts:[],
+        UserDetail:[]
     }
 
     async componentDidMount(){
-        const response = await posts.get('');
-        this.setState({posts:response.data});
+        const responsePosts = await posts.get('');
+        this.setState({posts:responsePosts.data});
+
+          const responseUser = await UserDetail.get('');
+        this.setState({UserDetail:responseUser.data});  
     }
+
+   
 
     render(){
 
-        const { posts } = this.state
+        const { posts,UserDetail } = this.state
+        const post = UserDetail.id 
 
         return(
+
             
            <Container>
 
-            <h2>nome do usuario </h2>
-            <h1>titulo do post</h1>
-            <p>post</p>
-            <a href="">comentarios</a><a href=""></a>
+            
 
-           {console.log(posts)}
-
-            {posts.map(post=>(
-            <li key={post.usersId}>
+            
+             {posts.map(post=>(
+            <div key={post.id}>
+                <h2></h2>
                 <h2>{post.title}</h2>
-            </li>))
-            };
+                <p>{post.body}</p>
+                <a href="">comentarios</a><br/><br/><br/>
+            </div>))
+            } 
 
             </Container>
-            
-        );
-        
-    }
+            );
+        }
 }
 
 export default Posts
